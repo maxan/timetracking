@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class UserCommandService {
+public class UserCommandController {
 
 	@RequestMapping(path = "signup", method = RequestMethod.PUT)
 	public @ResponseBody String signUp() {
+		return "{\"response\":\"success\"}";
+	}
+	
+	@RequestMapping(path = "registerWork", method = RequestMethod.PUT)
+	public @ResponseBody String registerWork() {
 		return "{\"response\":\"success\"}";
 	}
 	
