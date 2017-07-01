@@ -1,4 +1,4 @@
-package mesoft.tool.timetracking.simple.command;
+package mesoft.tool.timetracking.simple.domain.command;
 
 public class CreateEmployeeCommand {
 

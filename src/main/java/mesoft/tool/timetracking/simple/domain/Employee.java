@@ -3,8 +3,8 @@ package mesoft.tool.timetracking.simple.domain;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.commandhandling.model.AggregateRoot;
 
-import mesoft.tool.timetracking.simple.command.AddWorkedHourCommand;
-import mesoft.tool.timetracking.simple.command.CreateEmployeeCommand;
+import mesoft.tool.timetracking.simple.domain.command.AddWorkedHourCommand;
+import mesoft.tool.timetracking.simple.domain.command.CreateEmployeeCommand;
 import mesoft.tool.timetracking.simple.domain.event.EmployeeCreatedEvent;
 import mesoft.tool.timetracking.simple.domain.event.ItemWorkedAddedEvent;
 
