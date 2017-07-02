@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import mesoft.tool.timetracking.simple.domain.command.CreateEmployeeCommand;
+import mesoft.tool.timetracking.simple.domain.command.CreateUserEmployeeCommand;
 import mesoft.tool.timetracking.simple.endpoint.request.CreateEmployeeRequest;
 
 @RestController
@@ -29,14 +29,14 @@ public class UserCommandController {
 	public @ResponseBody String signUp(@RequestBody @Valid CreateEmployeeRequest request) {
 		String aggregateId = UUID.randomUUID().toString();
 		
-		commandGateway.send(new CreateEmployeeCommand(aggregateId, request.getRealName(), request.getUsername()));
+		commandGateway.send(new CreateUserEmployeeCommand(aggregateId, request.getRealName(), request.getUsername()));
 		
-		return "{\"response\":\"success\"}";
+		return "{\"response\":\"request done\"}";
 	}
 	
 	@RequestMapping(path = "registerWork", method = RequestMethod.PUT)
 	public @ResponseBody String registerWork() {
-		return "{\"response\":\"success\"}";
+		return "{\"response\":\"request done\"}";
 	}
 	
 }

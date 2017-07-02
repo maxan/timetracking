@@ -1,12 +1,12 @@
 package mesoft.tool.timetracking.simple.domain.command;
 
-public class CreateEmployeeCommand {
+public class CreateUserEmployeeCommand {
 
 	private final String aggregateId;
 	private final String realName;
 	private final String username;
 
-	public CreateEmployeeCommand(String id, String realName, String userName) {
+	public CreateUserEmployeeCommand(String id, String realName, String userName) {
 		this.aggregateId = id;
 		this.realName = realName;
 		this.username = userName;
@@ -42,7 +42,7 @@ public class CreateEmployeeCommand {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CreateEmployeeCommand other = (CreateEmployeeCommand) obj;
+		CreateUserEmployeeCommand other = (CreateUserEmployeeCommand) obj;
 		if (aggregateId == null) {
 			if (other.aggregateId != null)
 				return false;
