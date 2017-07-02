@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableJpaRepositories
 @RestController
 public class SimpleApplication {
-	
+
 	@RequestMapping("/")
 	public String home() {
 		return "Welcome to Time Tracking!";
