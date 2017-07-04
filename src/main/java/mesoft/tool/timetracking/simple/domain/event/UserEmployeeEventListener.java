@@ -4,27 +4,27 @@ import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mesoft.tool.timetracking.simple.database.command.entity.Employee;
-import mesoft.tool.timetracking.simple.database.command.repository.EmployeeRepository;
+import mesoft.tool.timetracking.simple.database.query.entity.EmployeeDocument;
+import mesoft.tool.timetracking.simple.database.query.repository.EmployeeDocumentRepository;
 
 @Component
 public class UserEmployeeEventListener {
 	
-	private EmployeeRepository employeeRepository;
+	private EmployeeDocumentRepository employeeDocumentRepository;
 
     @Autowired
-    public UserEmployeeEventListener(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public UserEmployeeEventListener(EmployeeDocumentRepository employeeDocumentRepository) {
+        this.employeeDocumentRepository = employeeDocumentRepository;
     }
     
     @EventHandler
     public void on(UserEmployeeCreatedEvent event) {
-		Employee newEmployee = new Employee();
+		EmployeeDocument newEmployee = new EmployeeDocument();
 
 		newEmployee.setRealName(event.getRealName());
 		newEmployee.setUsername(event.getUsername());
 
-		employeeRepository.save(newEmployee);
+		employeeDocumentRepository.save(newEmployee);
     }
 
 }

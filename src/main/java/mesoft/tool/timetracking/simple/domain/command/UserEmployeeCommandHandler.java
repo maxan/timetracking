@@ -5,6 +5,7 @@ import org.axonframework.eventhandling.EventBus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mesoft.tool.timetracking.simple.database.command.entity.Employee;
 import mesoft.tool.timetracking.simple.database.command.repository.EmployeeRepository;
 import mesoft.tool.timetracking.simple.domain.event.UserEmployeeCreatedEvent;
 
@@ -24,6 +25,13 @@ public class UserEmployeeCommandHandler {
     
     @CommandHandler
 	public void handler(CreateUserEmployeeCommand command) {
+    	Employee newEmployee = new Employee();
+    	
+    	newEmployee.setRealName(command.getRealName());
+		newEmployee.setUsername(command.getUsername());
+		
+		employeeRepository.save(newEmployee);
+    	
     	eventBus.publish(asEventMessage(new UserEmployeeCreatedEvent(command.getAggregateId(), command.getUsername(), command.getRealName())));
 	}
 	

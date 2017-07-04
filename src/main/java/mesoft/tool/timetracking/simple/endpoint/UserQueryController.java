@@ -5,24 +5,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import mesoft.tool.timetracking.simple.database.command.entity.Employee;
-import mesoft.tool.timetracking.simple.database.command.repository.EmployeeRepository;
+import mesoft.tool.timetracking.simple.database.query.entity.EmployeeDocument;
+import mesoft.tool.timetracking.simple.database.query.repository.EmployeeDocumentRepository;
 
 @RestController
 public class UserQueryController {
 	
+	// Normalized database: HSQLDB
+	// Unormalized dabatase: MongoDB
+	
+	private EmployeeDocumentRepository employeeDocumentRepository;
+	
 	@Autowired
-	private EmployeeRepository employeeRepository;
+	public UserQueryController(EmployeeDocumentRepository employeeDocumentRepository) {
+		this.employeeDocumentRepository = employeeDocumentRepository;
+	}
 
 	@RequestMapping("users")
 	public @ResponseBody String getUsers() {
-		// TODO: Change this later because it's only a test.
-		// Normalized database: HSQLDB
-		// Unormalized dabatase: MongoDB
-		
 		StringBuilder listReturned = new StringBuilder("{\"users\" : [");
 		
-		for (Employee employee : employeeRepository.findAll()) {
+		for (EmployeeDocument employee : employeeDocumentRepository.findAll()) {
 			listReturned.append("{\"realName\" : \"" + employee.getRealName() + "\", \"username\" : \"" + employee.getUsername() + "\"},");
 		}
 		
