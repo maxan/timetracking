@@ -20,11 +20,6 @@ public class UserEmployee {
 	private UserEmployee() {
 
 	}
-	
-//	@CommandHandler
-//	public UserEmployee(CreateUserEmployeeCommand command) {
-//		apply(new UserEmployeeCreatedEvent(command.getAggregateId(), command.getUsername(), command.getRealName()));
-//	}
 
 //	@CommandHandler
 //	public UserEmployee(AddWorkedHourCommand command) {
