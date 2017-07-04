@@ -3,16 +3,9 @@ package mesoft.tool.timetracking.simple.domain;
 import org.axonframework.commandhandling.model.AggregateIdentifier;
 import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import mesoft.tool.timetracking.simple.database.command.repository.EmployeeRepository;
-import mesoft.tool.timetracking.simple.domain.command.CreateUserEmployeeCommand;
 import mesoft.tool.timetracking.simple.domain.event.UserEmployeeCompletedEvent;
 import mesoft.tool.timetracking.simple.domain.event.UserEmployeeCreatedEvent;
-
-import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
-
-import org.axonframework.commandhandling.CommandHandler;
 
 @Aggregate
 public class UserEmployee {
@@ -28,10 +21,10 @@ public class UserEmployee {
 
 	}
 	
-	@CommandHandler
-	public UserEmployee(CreateUserEmployeeCommand command) {
-		apply(new UserEmployeeCreatedEvent(command.getAggregateId(), command.getUsername(), command.getRealName()));
-	}
+//	@CommandHandler
+//	public UserEmployee(CreateUserEmployeeCommand command) {
+//		apply(new UserEmployeeCreatedEvent(command.getAggregateId(), command.getUsername(), command.getRealName()));
+//	}
 
 //	@CommandHandler
 //	public UserEmployee(AddWorkedHourCommand command) {
