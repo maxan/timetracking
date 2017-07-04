@@ -1,18 +1,15 @@
-package mesoft.tool.timetracking.simple.domain.command;
+package mesoft.tool.timetracking.simple.domain.event;
 
-import org.axonframework.commandhandling.TargetAggregateIdentifier;
-
-public class CreateUserEmployeeCommand {
-
-	@TargetAggregateIdentifier
+public class UserEmployeeCompletedEvent {
+	
 	private final String aggregateId;
-	private final String realName;
 	private final String username;
+	private final String realName;
 
-	public CreateUserEmployeeCommand(String id, String realName, String userName) {
-		this.aggregateId = id;
+	public UserEmployeeCompletedEvent(String aggregateId, String username, String realName) {
+		this.aggregateId = aggregateId;
+		this.username = username;
 		this.realName = realName;
-		this.username = userName;
 	}
 
 	public String getAggregateId() {
@@ -45,7 +42,7 @@ public class CreateUserEmployeeCommand {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		CreateUserEmployeeCommand other = (CreateUserEmployeeCommand) obj;
+		UserEmployeeCompletedEvent other = (UserEmployeeCompletedEvent) obj;
 		if (aggregateId == null) {
 			if (other.aggregateId != null)
 				return false;
@@ -66,8 +63,8 @@ public class CreateUserEmployeeCommand {
 
 	@Override
 	public String toString() {
-		return "CreateEmployeeCommand [aggregateId=" + aggregateId + ", realName=" + realName + ", username=" + username
-				+ "]";
+		return "UserEmployeeCompletedEvent [aggregateId=" + aggregateId + ", username=" + username + ", realName="
+				+ realName + "]";
 	}
 
 }

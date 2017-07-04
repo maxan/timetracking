@@ -1,15 +1,14 @@
 package mesoft.tool.timetracking.simple.domain;
 
 import org.axonframework.commandhandling.model.AggregateIdentifier;
-import org.axonframework.eventhandling.EventHandler;
+import org.axonframework.eventsourcing.EventSourcingHandler;
 import org.axonframework.spring.stereotype.Aggregate;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import mesoft.tool.timetracking.simple.domain.command.AddWorkedHourCommand;
+import mesoft.tool.timetracking.simple.database.command.repository.EmployeeRepository;
 import mesoft.tool.timetracking.simple.domain.command.CreateUserEmployeeCommand;
-import mesoft.tool.timetracking.simple.domain.event.UserEmployeeCreateCompletedEvent;
-import mesoft.tool.timetracking.simple.domain.event.UserEmployeeCreateFailedEvent;
+import mesoft.tool.timetracking.simple.domain.event.UserEmployeeCompletedEvent;
 import mesoft.tool.timetracking.simple.domain.event.UserEmployeeCreatedEvent;
-import mesoft.tool.timetracking.simple.domain.event.ItemWorkedAddedEvent;
 
 import static org.axonframework.commandhandling.model.AggregateLifecycle.apply;
 
@@ -23,38 +22,39 @@ public class UserEmployee {
 	private String realName;
 	private String username;
 	private Status operationStatus;
+
+	@SuppressWarnings("unused")
+	private UserEmployee() {
+
+	}
 	
 	@CommandHandler
 	public UserEmployee(CreateUserEmployeeCommand command) {
-		apply(new UserEmployeeCreatedEvent(id, command.getUsername(), command.getRealName()));
+		apply(new UserEmployeeCreatedEvent(command.getAggregateId(), command.getUsername(), command.getRealName()));
 	}
 
-	@CommandHandler
-	public UserEmployee(AddWorkedHourCommand command) {
-		apply(new ItemWorkedAddedEvent(command.getWorkedHourId(), command.getAmmount()));
-	}
+//	@CommandHandler
+//	public UserEmployee(AddWorkedHourCommand command) {
+//		apply(new ItemWorkedAddedEvent(command.getWorkedHourId(), command.getAmmount()));
+//	}
 	
-	@EventHandler
-    public void on(UserEmployeeCreatedEvent event) throws Exception {
+	@EventSourcingHandler
+    public void on(UserEmployeeCreatedEvent event) {
 		id = event.getAggregateId();
 		realName = event.getRealName();
 		username = event.getUsername();
 		operationStatus = Status.STARTED;
     }
 	
-	@EventHandler
-    public void on(UserEmployeeCreateCompletedEvent event) {
+	@EventSourcingHandler
+    public void on(UserEmployeeCompletedEvent event) {
 		operationStatus = Status.COMPLETED;
     }
-
-    @EventHandler
-    public void on(UserEmployeeCreateFailedEvent event) {
-    	operationStatus = Status.FAILED;
-    }
-
-	public UserEmployee() {
-
-	}
+//
+//	@EventSourcingHandler
+//    public void on(UserEmployeeFailedEvent event) {
+//    	operationStatus = Status.FAILED;
+//    }
 	
 	private enum Status {
         STARTED,

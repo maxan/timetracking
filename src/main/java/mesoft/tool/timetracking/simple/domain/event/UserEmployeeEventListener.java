@@ -9,36 +9,22 @@ import mesoft.tool.timetracking.simple.database.command.repository.EmployeeRepos
 
 @Component
 public class UserEmployeeEventListener {
-
+	
 	private EmployeeRepository employeeRepository;
 
-	@Autowired
-	public UserEmployeeEventListener(EmployeeRepository employeeRepository) {
-		this.employeeRepository = employeeRepository;
-	}
-
-	@EventHandler
-	public void on(UserEmployeeCreatedEvent event) {
+    @Autowired
+    public UserEmployeeEventListener(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
+    
+    @EventHandler
+    public void on(UserEmployeeCreatedEvent event) {
 		Employee newEmployee = new Employee();
-		
+
 		newEmployee.setRealName(event.getRealName());
 		newEmployee.setUsername(event.getUsername());
-		
+
 		employeeRepository.save(newEmployee);
-		
-		//employeeRepository.findAll();
-		
-		System.out.println("Employee information saved successfully!");
-	}
-
-	@EventHandler
-	public void on(UserEmployeeCreateFailedEvent event) {
-		System.out.println("Save event fail...");
-	}
-
-	@EventHandler
-	public void on(UserEmployeeCreateCompletedEvent event) {
-		System.out.println("Save event completed...");
-	}
+    }
 
 }
